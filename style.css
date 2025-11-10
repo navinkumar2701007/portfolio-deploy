@@ -1,18 +1,51 @@
+/* ===== FIX: HEADER + CANVAS LAYOUT ===== */
+header {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Limit canvas only inside header */
+header canvas#devopsBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* 🚀 Prevent scroll blocking */
+}
+
+/* Optional isafety scroll fix */
+html, body {
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 /* ===== GLOBAL RESET ===== */
 body {
   margin: 0;
-  overflow: hidden;
   font-family: 'Poppins', sans-serif;
   color: #fff;
   background: #020617; /* deep tech navy */
 }
 
-canvas {
-  position: fixed;
+header canvas#devopsBackground {
+  position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
+  pointer-events: none; /* 💡 This stops the canvas from blocking scroll */
 }
+
 
 .content {
   position: relative;
