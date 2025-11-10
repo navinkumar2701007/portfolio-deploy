@@ -150,4 +150,34 @@ section.visible {
   opacity: 1;
   transform: translateY(0);
 }
+/* ===== GLOW EFFECT FOR SKILL ICONS ===== */
+.skills-grid img {
+  width: 60px;
+  height: 60px;
+  transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
+  filter: brightness(0.8);
+  border-radius: 10px;
+}
+
+.skills-grid img:hover {
+  transform: scale(1.2);
+  filter: brightness(1);
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.8);
+}
+
+/* Pulse glow when section is visible */
+section.visible .skills-grid img {
+  animation: softGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes softGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 180, 216, 0.4);
+    filter: brightness(0.9);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.9);
+    filter: brightness(1.1);
+  }
+}
 
