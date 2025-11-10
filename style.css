@@ -135,4 +135,19 @@ section {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+/* ===== SMOOTH SCROLL + FADE-IN SECTIONS ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
