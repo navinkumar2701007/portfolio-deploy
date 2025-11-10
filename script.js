@@ -92,6 +92,46 @@ for (let i = 0; i < 60; i++) {
     canvas.height = window.innerHeight;
   });
 }
+// ===== MOUSE INTERACTIVITY =====
+let mouse = {
+  x: null,
+  y: null,
+  radius: 100
+};
+
+window.addEventListener("mousemove", (event) => {
+  mouse.x = event.x;
+  mouse.y = event.y;
+});
+
+// optional: reset mouse when it leaves the window
+window.addEventListener("mouseout", () => {
+  mouse.x = null;
+  mouse.y = null;
+});
+
+// enhance particle motion
+Particle.prototype.update = function() {
+  this.x += this.speedX;
+  this.y += this.speedY;
+
+  // bounce off edges
+  if (this.x < 0 || this.x + this.size > canvas.width) this.speedX *= -1;
+  if (this.y < 0 || this.y + this.size > canvas.height) this.speedY *= -1;
+
+  // gentle attraction to mouse
+  if (mouse.x && mouse.y) {
+    const dx = this.x - mouse.x;
+    const dy = this.y - mouse.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < mouse.radius) {
+      this.x -= dx / 30;
+      this.y -= dy / 30;
+    }
+  }
+};
+
 
 // ===== FADE-IN ON SCROLL =====
 document.addEventListener("DOMContentLoaded", () => {
