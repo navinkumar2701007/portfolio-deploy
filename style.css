@@ -227,4 +227,18 @@ section.visible .skills-grid img {
 .project-card a:hover {
   color: #fff;
 }
+section, footer {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+}
+
+section.visible, footer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+section, footer {
+  opacity: 1 !important;
+  transform: none !important;
+}
 

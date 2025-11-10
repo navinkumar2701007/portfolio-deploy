@@ -133,13 +133,19 @@ Particle.prototype.update = function() {
 };
 
 
-// ===== FADE-IN ON SCROLL =====
+// ===== FADE-IN ON SCROLL (fixed version) =====
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll("section, footer");
+
+  // ensure all hidden at start
+  sections.forEach(section => section.classList.remove("visible"));
+
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
       });
     },
     { threshold: 0.1 }
