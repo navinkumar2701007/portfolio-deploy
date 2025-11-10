@@ -11,6 +11,33 @@ if (canvas) {
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
   ];
+	// ===== BACKGROUND PARTICLE EFFECT =====
+class BackgroundParticle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2;
+    this.speedX = (Math.random() - 0.5) * 0.5;
+    this.speedY = (Math.random() - 0.5) * 0.5;
+    this.opacity = Math.random() * 0.5 + 0.3;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+    ctx.fill();
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+  }
+}
+
 
   class Particle {
     constructor(x, y, image) {
@@ -40,7 +67,11 @@ if (canvas) {
   }
 
   const particles = [];
-  for (let i = 0; i < 20; i++) {
+ const bgParticles = [];
+for (let i = 0; i < 60; i++) {
+  bgParticles.push(new BackgroundParticle());
+}
+ for (let i = 0; i < 20; i++) {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height;
     const logo = logos[Math.floor(Math.random() * logos.length)];
@@ -49,7 +80,9 @@ if (canvas) {
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
+    bgParticles.forEach(p => { p.update(); p.draw(); });  // glowing particles
+  particles.forEach(p => { p.update(); p.draw(); });    // DevOps icons
+  
     requestAnimationFrame(animate);
   }
   animate();
